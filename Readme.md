@@ -37,7 +37,7 @@
 - Скачать архив репозитория  
 ![](extension_install_step_1.png)
 - Распаковать архив
-- Перейти в [расширения](chrome://extensions/)
+- Перейти в [расширения](chrome://extensions/) (chrome://extensions/)
 - Включить режим разработчика  
 ![](extension_install_step_2.png)
 ![](extension_install_step_2v.png)
