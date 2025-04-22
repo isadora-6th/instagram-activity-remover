@@ -1,0 +1,32 @@
+{
+    "name": "Automatic Insta Likes Remover Extension",
+    "version": "1.0",
+    "manifest_version": 2,
+    "permissions": [
+        "declarativeContent", 
+        "storage",
+        "tabs",
+        "http://*/",
+        "https://*/"
+    ],
+    "content_scripts": [
+        {
+            "js": ["scripts/content.js"],
+            "matches": [
+                "https://www.instagram.com/your_activity/interactions/comments*",
+                "https://www.instagram.com/your_activity/interactions/likes*"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        "scripts/rm_comments.js",
+        "scripts/rm_likes.js",
+        "popup.js"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "128" : "ico.png"
+        }
+    }
+}
