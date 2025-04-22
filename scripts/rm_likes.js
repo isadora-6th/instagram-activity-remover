@@ -104,7 +104,7 @@ function start_selection(){
         clearInterval(interval_id)
         selection_done = true;
       }
-    }, 60)
+    }, 90)
 
   }, 5000)
 
