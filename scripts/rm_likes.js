@@ -90,7 +90,7 @@ function start_selection(){
 
     elements = document.querySelectorAll('[data-bloks-name="ig.components.Icon"]')
 
-    to_remove = Math.min(elements.length, 50)
+    to_remove = Math.min(elements.length, 100)
     console.log("Removing : " + to_remove + "  likes");
 
     target_id = 0
@@ -104,7 +104,7 @@ function start_selection(){
         clearInterval(interval_id)
         selection_done = true;
       }
-    }, 100)
+    }, 60)
 
   }, 5000)
 
