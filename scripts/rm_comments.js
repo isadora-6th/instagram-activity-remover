@@ -71,7 +71,7 @@ function reset_if_stuck () {
 }
 
 function start_unstuck(){
-  reset_if_stuck_timer_id = setTimeout(reset_if_stuck, 30000)
+  reset_if_stuck_timer_id = setTimeout(reset_if_stuck, 60_000)
   return true;
 }
 
@@ -84,7 +84,7 @@ function start_selection(){
   }
   selection_started = true;
 
-  console.log('Start selection in 10s')
+  console.log('Start selection in 15s')
 
   setTimeout(function () {
 
@@ -105,7 +105,7 @@ function start_selection(){
       }
     }, 200)
 
-  }, 10000)
+  }, 15000)
 
   return false;
 }
