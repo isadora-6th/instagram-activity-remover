@@ -90,7 +90,9 @@ function start_selection(){
 
     elements = document.querySelectorAll('[data-bloks-name="ig.components.Icon"]')
 
-    console.log("Removing : " + elements.length + " comments");
+    // 20 max due to `500` if remove payload is too long
+    to_remove = Math.min(elements.length, 20)
+    console.log("Removing : " + to_remove + " comments");
 
     target_id = 0
     interval_id = setInterval(function () {
@@ -99,7 +101,7 @@ function start_selection(){
       }
 
       target_id += 1
-      if (target_id == elements.length) {
+      if (target_id == to_remove) {
         clearInterval(interval_id)
         selection_done = true;
       }
