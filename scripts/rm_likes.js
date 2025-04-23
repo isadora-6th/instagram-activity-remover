@@ -84,13 +84,14 @@ function start_selection(){
   }
   selection_started = true;
 
-  console.log('Start selection in 5s')
+  console.log('Start selection in 3s')
 
   setTimeout(function () {
 
     elements = document.querySelectorAll('[data-bloks-name="ig.components.Icon"]')
 
-    to_remove = Math.min(elements.length, 100)
+    // Instagram JS prevents selection of more than 35 items and will cause page crash if selected more
+    to_remove = Math.min(elements.length, 35)
     console.log("Removing : " + to_remove + "  likes");
 
     target_id = 0
@@ -104,9 +105,9 @@ function start_selection(){
         clearInterval(interval_id)
         selection_done = true;
       }
-    }, 90)
+    }, 60)
 
-  }, 5000)
+  }, 3000)
 
   return false;
 }
