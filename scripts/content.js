@@ -72,3 +72,4 @@ let loaded_observer = setInterval(function(){
 
 configure_storage();
 
+console.log("Extension triggered")

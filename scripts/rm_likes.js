@@ -91,8 +91,9 @@ function start_selection(){
     elements = document.querySelectorAll('[data-bloks-name="ig.components.Icon"]')
 
     // Instagram JS prevents selection of more than 35 items and will cause page crash if selected more
-    to_remove = Math.min(elements.length, 35)
-    console.log("Removing : " + to_remove + "  likes");
+    // 70 as post/reels icon is selected too 
+    to_remove = Math.min(elements.length, 70)
+    console.log("Removing : " + (to_remove / 2) + "  likes");
 
     target_id = 0
     interval_id = setInterval(function () {
