@@ -1,8 +1,8 @@
 // GOTO: https://www.instagram.com/your_activity/interactions/comments
 
 //document.querySelectorAll('[data-bloks-name="ig.components.Icon"]')[0].style.maskImage
-checked_style = 'url(https://i.instagram.com/static/images/bloks/icons/generated/circle-check__filled__24-4x.png/219f67ac4c95.png)'
-unchecked_style ='url(https://i.instagram.com/static/images/bloks/icons/generated/circle__outline__24-4x.png/2f71074dce25.png)'
+checked_style = 'filled'
+unchecked_style ='outline'
 
 filter_btns = [
   function(){return Array.from(document.querySelectorAll('[data-bloks-name="bk.components.TextSpan"]')).find(el => el.outerText === 'Сортировка и фильтр')},
@@ -96,7 +96,7 @@ function start_selection(){
 
     target_id = 0
     interval_id = setInterval(function () {
-      if (elements[target_id].style.maskImage == unchecked_style) {
+      if (elements[target_id].style.maskImage.contains(unchecked_style)) {
         elements[target_id].click()
       }
 
