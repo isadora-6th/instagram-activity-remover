@@ -98,7 +98,10 @@ function start_selection(){
     target_id = 0
     interval_id = setInterval(function () {
       if (elements[target_id].style.maskImage.contains(unchecked_style)) {
-        elements[target_id].click()
+        // Broken deleted posts are ignored
+        if(elements[target_id].parentElement.parentNode != null){
+          elements[target_id].click();
+        }
       }
 
       target_id += 1
