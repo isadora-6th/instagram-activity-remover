@@ -15,6 +15,14 @@ apply_remove_btns = [
   function(){return Array.from(document.querySelectorAll('._ap3a')).find(el => el.outerText === 'Удалить')}
 ]
 
+should_reload_after_each_run = false;
+
+execute_from_extension = function(configuration){
+  if(configuration.reload_after_each_iteration){
+    should_reload_after_each_run = true;
+  }
+}
+
 pick_button_selector = function(){
   return Array.from(document.querySelectorAll('[data-bloks-name="bk.components.Text"]')).find(el => el.outerText === 'Выбрать');
 }
@@ -50,6 +58,10 @@ selection_done = false;
 reset_if_stuck_timer_id = 0;
 
 function cycle_finish_ok(){
+  if(should_reload_after_each_run){
+    reset_if_stuck();
+  }
+
   running = false;
   selection_started = false;
   selection_done = false;
@@ -65,7 +77,7 @@ function cycle_finish_ok(){
   return true;
 }
 
-function reset_if_stuck () {
+function reset_if_stuck() {
   console.log("Reset_after_stuck");
   window.location.reload()
 }

@@ -14,7 +14,8 @@ function detect_load () {
 function configure_storage() {
     item_list = [
       'configuration.auto_remove_comments',
-      'configuration.auto_remove_likes'
+      'configuration.auto_remove_likes',
+      'configuration.reload_after_each_iteration'
     ]
 
     item_list.forEach(function(e){
@@ -47,6 +48,15 @@ function inject_script(to_inject){
   console.log("Injected "+ to_inject);
 }
 
+function inject_run(){
+    setTimeout(function(){
+        cfg_string = JSON.stringify(configuration)
+
+        var d = document.createElement('script');
+        d.innerHTML = "execute_from_extension(" + cfg_string + ")";
+        (document.head || document.documentElement).appendChild(d);
+    }, 500)
+}
 
 let loaded_observer = setInterval(function(){
   if(!detect_load()){
@@ -58,12 +68,14 @@ let loaded_observer = setInterval(function(){
   if(configuration.auto_remove_comments){
     if(document.URL == 'https://www.instagram.com/your_activity/interactions/comments'){
       inject_script("rm_comments.js")
+      inject_run()
     }
   }
 
   if(configuration.auto_remove_likes){
     if(document.URL == 'https://www.instagram.com/your_activity/interactions/likes'){
       inject_script("rm_likes.js")
+      inject_run()
     }
   }
 

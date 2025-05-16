@@ -15,6 +15,14 @@ apply_remove_btns = [
   function(){return Array.from(document.querySelectorAll('._ap3a')).find(el => el.outerText === 'Не нравится')}
 ]
 
+should_reload_after_each_run = false;
+
+execute_from_extension = function(configuration){
+  if(configuration.reload_after_each_iteration){
+    should_reload_after_each_run = true;
+  }
+}
+
 pick_button_selector = function(){
   return Array.from(document.querySelectorAll('[data-bloks-name="bk.components.Text"]')).find(el => el.outerText === 'Выбрать');
 }
@@ -50,6 +58,10 @@ selection_done = false;
 reset_if_stuck_timer_id = 0;
 
 function cycle_finish_ok(){
+  if(should_reload_after_each_run){
+    reset_if_stuck();
+  }
+
   running = false;
   selection_started = false;
   selection_done = false;
@@ -65,7 +77,7 @@ function cycle_finish_ok(){
   return true;
 }
 
-function reset_if_stuck () {
+function reset_if_stuck() {
   console.log("Reset_after_stuck");
   window.location.reload()
 }
@@ -87,22 +99,21 @@ function start_selection(){
   console.log('Start selection in 3s')
 
   setTimeout(function () {
-
-    elements = document.querySelectorAll('[data-bloks-name="ig.components.Icon"]')
+    elements = Array.from(document.querySelectorAll('[data-bloks-name="ig.components.Icon"]')).filter(function (e) {
+      all_ok = true;
+      all_ok &= e.style.maskImage.contains(unchecked_style);
+      all_ok &= e.parentElement.parentNode != null;
+      return all_ok;
+    });
 
     // Instagram JS prevents selection of more than 35 items and will cause page crash if selected more
     // 70 as post/reels icon is selected too 
-    to_remove = Math.min(elements.length, 70)
-    console.log("Removing : " + (to_remove / 2) + "  likes");
+    to_remove = Math.min(elements.length, 35)
+    console.log("Removing : " + (to_remove) + "  likes");
 
     target_id = 0
     interval_id = setInterval(function () {
-      if (elements[target_id].style.maskImage.contains(unchecked_style)) {
-        // Broken deleted posts are ignored
-        if(elements[target_id].parentElement.parentNode != null){
-          elements[target_id].click();
-        }
-      }
+      elements[target_id].click();
 
       target_id += 1
       if (target_id == to_remove) {
@@ -126,8 +137,8 @@ do_cycle_remove_list = [
   function(){return start_unstuck()},
   function(){return try_click(pick_button_selector)},
   function(){return start_selection();},
-  function(){return try_click(apply_remove_btns[0])},
-  function(){return try_click(apply_remove_btns[1])},
+  //function(){return try_click(apply_remove_btns[0])},
+  //function(){return try_click(apply_remove_btns[1])},
   function(){return cycle_finish_ok();}
 ]
 
