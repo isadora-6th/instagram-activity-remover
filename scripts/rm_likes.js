@@ -107,7 +107,6 @@ function start_selection(){
     });
 
     // Instagram JS prevents selection of more than 35 items and will cause page crash if selected more
-    // 70 as post/reels icon is selected too 
     to_remove = Math.min(elements.length, 35)
     console.log("Removing : " + (to_remove) + "  likes");
 
@@ -137,8 +136,8 @@ do_cycle_remove_list = [
   function(){return start_unstuck()},
   function(){return try_click(pick_button_selector)},
   function(){return start_selection();},
-  //function(){return try_click(apply_remove_btns[0])},
-  //function(){return try_click(apply_remove_btns[1])},
+  function(){return try_click(apply_remove_btns[0])},
+  function(){return try_click(apply_remove_btns[1])},
   function(){return cycle_finish_ok();}
 ]
 
